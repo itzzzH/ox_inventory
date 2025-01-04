@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import useNuiEvent from '../../hooks/useNuiEvent';
 import InventoryControl from './InventoryControl';
 import InventoryHotbar from './InventoryHotbar';
@@ -15,7 +15,7 @@ import { closeContextMenu } from '../../store/contextMenu';
 import Fade from '../utils/transitions/Fade';
 
 const Inventory: React.FC = () => {
-  const [inventoryVisible, setInventoryVisible] = useState(false);
+  const [inventoryVisible, setInventoryVisible] = React.useState(false);
   const dispatch = useAppDispatch();
 
   useNuiEvent<boolean>('setInventoryVisible', setInventoryVisible);
@@ -44,11 +44,13 @@ const Inventory: React.FC = () => {
     <>
       <Fade in={inventoryVisible}>
         <div className="inventory-wrapper">
-          <LeftInventory />
-          <InventoryControl />
-          <RightInventory />
-          <Tooltip />
-          <InventoryContext />
+          <div className="inventory-wrapper-container">
+            <LeftInventory />
+            <InventoryControl />
+            <RightInventory />
+            <Tooltip />
+            <InventoryContext />
+          </div>
         </div>
       </Fade>
       <InventoryHotbar />
