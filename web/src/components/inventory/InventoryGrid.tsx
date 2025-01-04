@@ -57,4 +57,3 @@ const InventoryGrid: React.FC<{ inventory: Inventory, direction: 'left' | 'right
 };
 
 export default InventoryGrid;
-‎web/src/components/inventory/LeftInventory.tsx
