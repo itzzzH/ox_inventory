@@ -1,17 +1,23 @@
-$mainColor: #22232c;
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+$mainColor: #6e6e6e2a;
 $textColor: #c1c2c5;
-$mainFont: Roboto;
+$mainFont: Oswald;
 
-$secondaryColor: rgba(12, 12, 12, 0.4);
-$secondaryColorHighlight: #33343F;
-$secondaryColorLight: rgba(0, 0, 0, 0.5);
-$secondaryColorDark: rgba(12, 12, 12, 0.8);
+$secondaryColor: #252525dc; /* durple #7 */
+$secondaryColorHighlight: #7a0000; /* durple #3 */
+$secondaryColorLight: rgb(0, 0, 0); /* isnt even used? */
+$secondaryColorDark: #7a0000; /* durple #3 */
 
-$gridCols: 5;
-$gridRows: 5;
-$gridSize: 10.2vh;
-$gridGap: 2px;
-$containerSize: calc(#{$gridRows} * #{$gridSize + 0.22vh} + #{$gridRows} * #{$gridGap});
+$backgroundColor: #111111f6; /* durple #8 */
+
+$gridColsL: 5;
+$gridRowsL: 5;
+$gridColsR: 5;
+$gridRowsR: 5;
+$gridSize: 9.2vh;
+$gridGap: 0.3rem;
+$containerSize: calc(#{$gridRowsL} * #{$gridSize + 0.22vh} + #{$gridRowsL} * #{$gridGap});
 
 body {
   margin: 0;
@@ -58,8 +64,8 @@ input[type='number']::-webkit-outer-spin-button {
 
 .context-menu-list {
   min-width: 200px;
-  background-color: $mainColor;
-  color: $textColor;
+  background-color:#252525fa;
+  color: #252525fa;
   padding: 4px;
   border-color: rgba(0, 0, 0, 0.2);
   border-style: inset;
@@ -70,7 +76,7 @@ input[type='number']::-webkit-outer-spin-button {
   flex-direction: column;
 }
 
-.context-menu-item  {
+.context-menu-item {
   padding: 8px;
   border-radius: 4px;
   background-color: transparent;
@@ -121,8 +127,18 @@ button:active {
   justify-content: center;
   align-items: center;
   height: 100%;
+}
 
-  gap: 20px;
+.inventory-wrapper-container {
+  background-color: $backgroundColor;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: start;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 5px;
 }
 
 .inventory-control {
@@ -131,7 +147,8 @@ button:active {
   .inventory-control-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
+    padding-top: 3.5rem;
     justify-content: center;
     align-items: center;
   }
@@ -139,7 +156,8 @@ button:active {
   .inventory-control-input {
     transition: 200ms;
     padding: 16px 8px;
-    border-radius: 2.5%;
+    width: 3rem;
+    border-radius: 0.5rem;
     font-family: $mainFont;
     font-size: 16px;
     text-align: center;
@@ -158,7 +176,7 @@ button:active {
     background-color: $secondaryColor;
     transition: 200ms;
     padding: 12px 8px;
-    border-radius: 2.5%;
+    border-radius: 0.5rem;
     border: none;
     text-transform: uppercase;
     font-family: $mainFont;
@@ -225,19 +243,16 @@ button:active {
 }
 
 .useful-controls-button {
-  position: absolute !important;
-  bottom: 25px;
-  right: 25px;
   transition: 200ms !important;
   border: none;
   color: white;
-  width: 52px;
-  height: 52px;
+  padding: 7px 8px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   fill: white;
-  border-radius: 5% !important;
+  border-radius: 0.5rem;
   background-color: $secondaryColor !important;
   &:hover {
     background-color: $secondaryColorDark !important;
@@ -255,12 +270,13 @@ button:active {
 
 // Dialog is used fro useful controls window
 
-
 // inventory grids
 .inventory-grid-wrapper {
   display: flex;
   flex-direction: column;
   gap: calc($gridGap * 2);
+  padding: 0.625rem;
+  border-radius: 0.5rem;
 }
 .inventory-grid-header-wrapper {
   display: flex;
@@ -272,10 +288,19 @@ button:active {
   }
 }
 
-.inventory-grid-container {
+.inventory-grid-container-left {
   display: grid;
   height: $containerSize;
-  grid-template-columns: repeat($gridCols, $gridSize);
+  grid-template-columns: repeat($gridColsL, $gridSize);
+  grid-auto-rows: $gridSize + 0.22vh;
+  gap: $gridGap;
+  overflow-y: scroll;
+}
+
+.inventory-grid-container-right {
+  display: grid;
+  height: $containerSize;
+  grid-template-columns: repeat($gridColsR, $gridSize);
   grid-auto-rows: $gridSize + 0.22vh;
   gap: $gridGap;
   overflow-y: scroll;
@@ -283,28 +308,23 @@ button:active {
 
 // inventory slots
 .inventory-slot {
-  background-color: $secondaryColor;
+  background-color: $mainColor;
   background-repeat: no-repeat;
   background-position: center;
-  border-radius: 2.5%;
+  border-radius: 0.5rem;
   image-rendering: -webkit-optimize-contrast;
   position: relative;
-  background-size: 7vh;
+  background-size: 5.5vh;
   color: $textColor;
-  border-color: rgba(0, 0, 0, 0.2);
-  border-style: inset;
-  border-width: 1px;
+  border: 1px solid #25272bd5;
 }
 
 .inventory-slot-label-box {
-  background-color: $mainColor;
+  background-color: #202020;
   color: $textColor;
   text-align: center;
-  border-bottom-left-radius: 0.25vh;
-  border-bottom-right-radius: 0.25vh;
-  border-top-color: rgba(0, 0, 0, 0.2);
-  border-top-style: inset;
-  border-top-width: 1px;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
 }
 
 .inventory-slot-label-text {
@@ -312,19 +332,19 @@ button:active {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 2px 3px;
+  padding: 0.2px 3px;
   font-weight: 400;
   font-family: $mainFont;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .inventory-slot-number {
-  background-color: white;
-  color: black;
+  background-color: #444444;
+  color: #fff;
   height: 12px;
-  border-top-left-radius: 0.25vh;
-  border-bottom-right-radius: 0.25vh;
-  padding: 3px;
+  border-radius: 0.25vh;
+  border-top-left-radius: 0.5rem;
+  padding: 5px;
   font-size: 12px;
   font-family: $mainFont;
 }
@@ -384,11 +404,10 @@ button:active {
   }
 }
 
-
 .tooltip-wrapper {
   pointer-events: none;
   display: flex;
-  background-color: $mainColor;
+  background-color: rgb(43, 43, 43);
   width: 200px;
   padding: 8px;
   flex-direction: column;
@@ -475,7 +494,7 @@ button:active {
   flex-wrap: nowrap;
   gap: 2px;
   position: absolute;
-  bottom: 20vh;
+  bottom: 10vh;
   left: 50%;
   width: 100%;
   margin-left: calc(50% - calc($gridSize/2));
@@ -485,11 +504,10 @@ button:active {
 .item-notification-action-box {
   width: 100%;
   color: $textColor;
-  background-color: $secondaryColor;
+  //background-color: $mainColor;
   text-transform: uppercase;
   text-align: center;
-  border-top-left-radius: 0.25vh;
-  border-top-right-radius: 0.25vh;
+  border-radius: 0.5rem;
   font-family: $mainFont;
   p {
     font-size: 11px;
@@ -505,16 +523,16 @@ button:active {
 }
 
 .durability-bar {
-  background: rgba(0, 0, 0, 0.5);
+  background: #e2e3e618;
   height: 3px;
+  border-radius: 0.25rem;
   overflow: hidden;
 }
 
 .weight-bar {
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px inset rgba(0, 0, 0, 0.1);
+  background: #9f9fa02c;
   height: 0.8vh;
-  border-radius: 5%;
+  border-radius: 0.25rem;
   overflow: hidden;
 }
 
@@ -537,7 +555,7 @@ button:active {
 }
 
 .transition-slide-up-enter {
-  transform: translateY(200px)
+  transform: translateY(200px);
 }
 
 .transition-slide-up-enter-active {
