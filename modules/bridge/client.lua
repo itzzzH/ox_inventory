@@ -33,7 +33,7 @@ function client.onLogout()
 	if not PlayerData.loaded then return end
 
 	if client.parachute then
-		Utils.DeleteEntity(client.parachute[1])
+		Utils.DeleteEntity(client.parachute)
 		client.parachute = false
 	end
 
@@ -48,7 +48,6 @@ function client.onLogout()
     for _, v in pairs(Items --[[@as table]]) do
         v.count = 0
     end
-
 	PlayerData.loaded = false
 	client.drops = nil
 
